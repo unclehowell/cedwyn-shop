@@ -1,0 +1,30 @@
+{
+ "source": "https://cedwyn.bucklerfamily.estate/api/catalogue",
+ "note": "This webapp's own data store: the central-catalogue fields for the record IDs cited in public/index.html, public/quotes/index.html, public/terms/index.html. Derived and read-only; never edit by hand (tools/sync_central.py rewrites it).",
+ "fields": [
+  "id",
+  "kind",
+  "title",
+  "date_display",
+  "date_sort",
+  "status",
+  "page"
+ ],
+ "synced_utc": "2026-11-07T20:23:43Z",
+ "count": 1,
+ "not_in_central": [
+  "EV-0227",
+  "EV-0291"
+ ],
+ "items": {
+  "EV-0035": {
+   "id": "EV-0035",
+   "kind": "evidence",
+   "title": "Western Mail: “City wants common for play-field” — Leckwith Common inquiry (Mrs Mary Doreen Buckler)",
+   "date_display": "7 May 1958 (inquiry 6 May 1958)",
+   "date_sort": "1958-05-07",
+   "status": "PENDING",
+   "page": "/research/evidence/ev-0035-western-mail-1958-leckwith-common-hearing/"
+  }
+ }
+}
