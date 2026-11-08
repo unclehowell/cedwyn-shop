@@ -10,11 +10,11 @@
 .sh-lead{color:#aaa;margin:0 0 1.1rem;font-size:.92rem}
 .sh-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(min-width:760px){.sh-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
-@media(min-width:1060px){.sh-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1060px){.sh-grid{grid-template-columns:repeat(3,1fr)}}
 .sh-card{border:1px solid #2a2a2a;background:#070707;display:flex;flex-direction:column}
-.sh-img{aspect-ratio:1/1;background:#111;overflow:hidden}.sh-img img{width:100%;height:100%;object-fit:cover;display:block}
+.sh-img{aspect-ratio:1/1;background:#111;overflow:hidden}.sh-img img{width:100%;height:100%;object-fit:contain;display:block}
 .sh-body{padding:10px 10px 12px;display:flex;flex-direction:column;gap:.35rem;flex:1}
-.sh-body h3{font-size:.9rem;line-height:1.2;margin:0;font-weight:500;text-transform:uppercase;letter-spacing:.02em}
+.sh-body h3{font-size:1rem;line-height:1.2;margin:0;font-weight:500;text-transform:uppercase;letter-spacing:.02em}
 .sh-body p{margin:0;color:#bdbdbd;font-size:.78rem;line-height:1.4}
 .sh-kind{font-size:.6rem!important;letter-spacing:.16em;text-transform:uppercase;color:#888!important}
 .sh-buy{margin-top:auto;text-align:center;font-size:.72rem!important;padding:.6rem .4rem!important}
