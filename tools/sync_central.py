@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fill this webapp's own data store, public/data/central.json, with only the central-catalogue fields the page shows.
-Read-only against the central catalogue (https://cedwyn.bucklerfamily.estate/api/catalogue/<id>). public/data/central.json is a
+Read-only against the central catalogue (https://cedwyn.bucklerfamily.estate/api/catalogue, read as paged list requests). public/data/central.json is a
 derived cache: never edit it by hand; the central catalogue stays the single source of truth. The file is rewritten only
 when a record it holds changed, and a run that can read fewer than half of the records leaves it as it was.
 Gift Shop: the record IDs come from public/index.html, public/quotes/index.html, public/terms/index.html, so a record
@@ -17,16 +17,25 @@ for g in NEEDS:
     for f in sorted(ROOT.glob(g)):
         if f.resolve() == OUT.resolve(): continue   # never read the store itself
         ids |= set(re.findall(r'\b(?:EV|MR|AR)-\d{4}\b', f.read_text(encoding='utf-8')))
-items, miss = {}, []
+items, miss, cat, total, off = {}, [], {}, None, 0
+try:   # paged list reads (/api/catalogue?limit=500&offset=N, edge-cached), not one uncached request per ID (8 Nov 2026, D1 read load)
+    while True:
+        req = urllib.request.Request(f"{API.rstrip('/')}?limit=500&offset={off}", headers={'User-Agent': 'cedwyn-webapp-sync/1.1'})
+        page = json.load(urllib.request.urlopen(req, timeout=60))
+        rows = page.get('items') or []
+        total = page.get('total', total)
+        for it in rows:
+            if it.get('id'): cat[it['id']] = {k: it.get(k) for k in FIELDS}
+        off += len(rows)
+        if not rows or (total is not None and off >= total): break
+        time.sleep(1)
+except Exception as e:
+    sys.exit(f'catalogue listing could not be read ({e}); store left as it was')
+if total is None or len(cat) < total:
+    sys.exit(f'catalogue listing incomplete ({len(cat)} of {total}); store left as it was')
 for i in sorted(ids):
-    try:
-        req = urllib.request.Request(f'{API}{i}?cb={int(time.time())}', headers={'User-Agent': 'cedwyn-webapp-sync/1.0'})
-        it = (json.load(urllib.request.urlopen(req, timeout=30)) or {}).get('item') or {}
-        if it.get('id') == i: items[i] = {k: it.get(k) for k in FIELDS}
-        else: miss.append(i)
-    except Exception:
-        miss.append(i)
-    time.sleep(0.2)
+    if i in cat: items[i] = cat[i]
+    else: miss.append(i)
 prev = {}
 try: prev = json.loads(OUT.read_text(encoding='utf-8'))
 except Exception: pass
