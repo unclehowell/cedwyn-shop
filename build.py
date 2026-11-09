@@ -38,7 +38,7 @@ P = [p for p in P if NOHERALDRY(p)]; DS = [d for d in DS if NOHERALDRY(d)]
 live = [p for p in P if p.get('buy_url')]
 NOTICE = '' if CFG.get('checkout_open') else '<p class="sh-note">Printed items open for checkout very soon; the newest (Lavernock 1897 and Peerless Jim) are marked New.</p>'
 idx = HEAD.format(title="Cedwyn Estate shop · Tŷ Mawr / Great House Farm", desc="The Cedwyn Estate shop: photographs from the farm’s own album, Lavernock 1897 and Peerless Jim prints, posters, T-shirts, mugs and totes for Tŷ Mawr / Great House Farm, Llandough. Printed to order, sold at cost.", path="/", v=v) + f"""
-<main>
+<main data-cw-nolevels>
 <section class="sl-hero sh-hero"><div class="sl-hero-in"><p class="sh-k">Tŷ Mawr · Great House Farm · Llandough</p>
 <h1>Cedwyn Estate</h1>
 <p>The estate as the family theorises it once was, and the farm at its heart. Photographs from the farm’s own album and local history, printed when you order and sold at cost.</p>
