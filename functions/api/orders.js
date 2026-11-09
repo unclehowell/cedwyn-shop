@@ -9,12 +9,14 @@ async function sha256(value) {
 export async function onRequestPost({ request, env }) {
   if (!env.SHOP_DB || env.SHOP_ENV !== "production") return json({ error: "Order requests are not enabled on this preview." }, 503);
   const origin = request.headers.get("Origin");
-  if (origin) {
-    try {
-      const host = new URL(origin).hostname;
-      if (host !== "bucklerfamily.estate" && !host.endsWith(".bucklerfamily-shop.pages.dev")) return json({ error: "Request origin not allowed." }, 403);
-    } catch { return json({ error: "Invalid request origin." }, 403); }
-  }
+  if (!origin) return json({ error: "Request origin required." }, 403);
+  try {
+    const parsedOrigin = new URL(origin);
+    const host = parsedOrigin.hostname;
+    if (parsedOrigin.protocol !== "https:" || (host !== "bucklerfamily.estate" && host !== "bucklerfamily-shop.pages.dev" && !host.endsWith(".bucklerfamily-shop.pages.dev"))) {
+      return json({ error: "Request origin not allowed." }, 403);
+    }
+  } catch { return json({ error: "Invalid request origin." }, 403); }
   const contentLength = Number(request.headers.get("Content-Length") || 0);
   if (contentLength > 12000) return json({ error: "Request is too large." }, 413);
   if (!(request.headers.get("Content-Type") || "").toLowerCase().includes("application/json")) return json({ error: "JSON request required." }, 415);
@@ -51,6 +53,9 @@ export async function onRequestPost({ request, env }) {
   const ipHash = await sha256(ip);
   const windowId = Math.floor(Date.now() / 900000);
   try {
+    if (windowId % 96 === 0) {
+      await env.SHOP_DB.prepare("DELETE FROM shop_order_rate WHERE window_id < ?").bind(windowId - 96).run();
+    }
     const rate = await env.SHOP_DB.prepare(
       "INSERT INTO shop_order_rate (ip_hash, window_id, hits) VALUES (?, ?, 1) ON CONFLICT(ip_hash, window_id) DO UPDATE SET hits = hits + 1 RETURNING hits"
     ).bind(ipHash, windowId).first();

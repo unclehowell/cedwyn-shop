@@ -36,7 +36,7 @@ export async function requireShopAdmin(request, env) {
     const audience = Array.isArray(claims.aud) ? claims.aud : [claims.aud];
     const now = Math.floor(Date.now() / 1000);
     if (!audience.includes(env.SHOP_ACCESS_AUD)) return null;
-    if (claims.exp <= now || (claims.nbf && claims.nbf > now + 30)) return null;
+    if (!Number.isFinite(claims.exp) || claims.exp <= now || (claims.nbf !== undefined && (!Number.isFinite(claims.nbf) || claims.nbf > now + 30))) return null;
     if (claims.email?.toLowerCase() !== env.SHOP_ADMIN_EMAIL.toLowerCase()) return null;
     const jwk = (await getKeys(issuer)).find(key => key.kid === header.kid);
     if (!jwk) return null;
