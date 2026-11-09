@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-GB"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Shop orders · Cedwyn Estate</title>
+<link rel="stylesheet" href="/assets/theme.css?v=5"><link rel="stylesheet" href="/assets/shop.css?v=9">
+<style>
+.admin-wrap{max-width:1080px;margin:0 auto;padding:5rem 18px 3rem;color:#ddd}
+.admin-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.admin-order{border:1px solid #333;background:#090909;padding:14px;margin:12px 0}
+.admin-order h2{font-size:1.05rem;margin:0 0 8px}.admin-meta{color:#aaa;font-size:.82rem;line-height:1.5}
+.admin-items{margin:12px 0;padding-left:18px}
+.admin-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:12px}
+.admin-controls label,.admin-note{display:grid;gap:5px;color:#aaa;font-size:.8rem}
+.admin-controls input,.admin-controls select,.admin-note textarea{width:100%;padding:9px;background:#151515;color:#eee;border:1px solid #444}
+.admin-note{margin-top:10px}.admin-actions{display:flex;gap:8px;align-items:center;margin-top:10px}
+.admin-actions button{padding:9px 13px;border:1px solid #b99a5a;background:#b99a5a;color:#111;cursor:pointer}
+.admin-message{min-height:1.4em;color:#d8c596}.admin-empty{color:#aaa;border:1px dashed #444;padding:22px}
+</style></head><body class="sl-home">
+<main class="admin-wrap">
+<div class="admin-head"><div><p class="sh-k">Private administration</p><h1>Shop order requests</h1></div><button id="reload-orders" type="button" class="sl-btn">Refresh</button></div>
+<p class="sh-fine">Order requests only. No card payment is processed here. Mark an order as paid only after confirming cleared funds outside this system.</p>
+<p id="admin-message" class="admin-message" role="status" aria-live="polite"></p>
+<div id="admin-orders"><p class="admin-empty">Loading orders…</p></div>
+</main><script src="/admin/admin.js?v=1.0.0" defer></script></body></html>
