@@ -19,10 +19,10 @@ The prices shown by the former Printify Pop-Up Store are not converted or carrie
 ## First deployment setup
 
 1. Apply migrations/0001_shop.sql to D1 database ghf-enquiries (database ID is configured through the Cloudflare Pages binding, not stored here).
-2. Configure the Pages project with a D1 binding named SHOP_DB for the existing ghf-enquiries database, in both preview and production.
-3. Set SHOP_ENV=preview in the preview deployment and SHOP_ENV=production in production. Preview order writes are deliberately disabled.
+2. Configure the production Pages project with a D1 binding named SHOP_DB for the existing ghf-enquiries database. Do not add that binding to preview deployments.
+3. Set SHOP_ENV=preview in the preview deployment and SHOP_ENV=production in production. Preview has no SHOP_DB binding and order writes are deliberately disabled.
 4. Create two Cloudflare Access self-hosted applications for the canonical paths /shop/admin* and /shop/api/admin*, each with an allow policy for the account owner's verified identity.
 5. Set SHOP_ACCESS_AUD to the Access audience tag for the API application and SHOP_ADMIN_EMAIL to the allowed email address in the production Pages environment.
-6. Deploy and test the public request flow, Access-protected admin queue, status changes, GBP quotations, and path-proxy asset/API URLs before enabling production requests.
+6. The admin page is https://bucklerfamily.estate/shop/admin/ and uses the existing Cloudflare Access identity. Deploy and test the public request flow, Access-protected admin queue, status changes, GBP quotations, and path-proxy asset/API URLs before enabling production requests. There are no automated customer emails in this release; the reference is shown on screen and requests appear in the admin queue.
 
 Do not add an API token, payment credential, customer record, bank detail or secret to this repository.
