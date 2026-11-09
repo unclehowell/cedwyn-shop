@@ -12,7 +12,7 @@ HEAD = """<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta na
 <link rel="stylesheet" href="/assets/theme.css?v={v}"><link rel="stylesheet" href="/assets/shop.css?v={v}">
 <script src="/assets/theme.js?v={v}" defer></script><script src="https://bucklerfamily.estate/ghf-lang/ghf-lang.js?v=2.0.3" data-site="shop" defer></script>
 <script src="https://bucklerfamily.estate/ebook/cta.js" defer></script>
-<script src="https://bucklerfamily.estate/ghf-lang/ghf-boot.js?v=2.0.3"></script>
+<script>window.__cedwynLP="/shop/"</script><script src="https://bucklerfamily.estate/_cedwyn/ghf/ghf-boot.js?v=2.1.30"></script>
 </head><body class="sl-home">
 <header class="sl-nav"><nav class="top" aria-label="Site"><a href="/"><strong>Cedwyn Estate shop</strong></a><a href="/#products">Collection</a><a href="https://ebooks.bucklerfamily.estate/">E-books</a><a class="sl-ghost" href="https://greathousefarmwiki.wordpress.com/">Legal Wiki</a></nav></header>
 """
