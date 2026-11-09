@@ -45,11 +45,12 @@ export async function onRequestPatch({ request, env }) {
   if (adminNote.length > 1000) return json({ error: "Admin note must be 1,000 characters or fewer." }, 400);
   if (quoteValue !== null && (!Number.isInteger(quoteValue) || quoteValue < 1 || quoteValue > 10000000)) return json({ error: "Enter a valid GBP total in pence, or leave it blank." }, 400);
   try {
-    const current = await env.SHOP_DB.prepare("SELECT id, status FROM shop_orders WHERE id = ?").bind(id).first();
+    const current = await env.SHOP_DB.prepare("SELECT id, status, quoted_total_pence FROM shop_orders WHERE id = ?").bind(id).first();
     if (!current) return json({ error: "Order not found." }, 404);
+    if ((status === "awaiting_payment" || status === "paid") && quoteValue === null && current.quoted_total_pence === null) return json({ error: "Set a GBP quotation before awaiting or recording payment." }, 400);
     const now = new Date().toISOString();
     const paidAt = status === "paid" && current.status !== "paid" ? now : null;
-    const fulfilledAt = status === "fulfilled" ? now : null;
+    const fulfilledAt = status === "fulfilled" && current.status !== "fulfilled" ? now : null;
     await env.SHOP_DB.batch([
       env.SHOP_DB.prepare(
         "UPDATE shop_orders SET status = ?, admin_note = ?, quoted_total_pence = ?, updated_at = ?, paid_at = COALESCE(?, paid_at), fulfilled_at = COALESCE(?, fulfilled_at) WHERE id = ?"

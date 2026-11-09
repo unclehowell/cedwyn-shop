@@ -1,6 +1,6 @@
 import { ORDERABLE_PRODUCTS } from "../_lib/catalog.js";
 import { json } from "../_lib/access.js";
-const EMAIL = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 async function sha256(value) {
   const bytes = new TextEncoder().encode(value);
   const digest = await crypto.subtle.digest("SHA-256", bytes);
@@ -33,7 +33,7 @@ export async function onRequestPost({ request, env }) {
   const note = String(body.customerNote || "").trim();
   if (name.length < 2 || name.length > 100) return json({ error: "Enter your name (up to 100 characters)." }, 400);
   if (email.length > 254 || !EMAIL.test(email)) return json({ error: "Enter a valid email address." }, 400);
-  if (!/^[A-Z]{2,5}$/.test(country)) return json({ error: "Choose a delivery country." }, 400);
+  if (!["GB","IE","AR","US","CA","AU","OTHER"].includes(country)) return json({ error: "Choose a delivery country." }, 400);
   if (postcode.length < 2 || postcode.length > 24) return json({ error: "Enter a valid postcode or postal code." }, 400);
   if (note.length > 600) return json({ error: "The message must be 600 characters or fewer." }, 400);
   if (!Array.isArray(body.items) || body.items.length < 1 || body.items.length > 10) return json({ error: "Choose between one and ten different products." }, 400);
