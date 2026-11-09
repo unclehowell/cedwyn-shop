@@ -13,7 +13,7 @@
 @media(min-width:760px){.sh-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
 @media(min-width:1060px){.sh-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}}
 .sh-card{border:1px solid #2a2a2a;background:#070707;display:flex;flex-direction:column}
-.sh-img{aspect-ratio:1/1;background:#111;overflow:hidden}.sh-img img{width:100%;height:100%;object-fit:contain;display:block}
+.sh-img{aspect-ratio:1/1;background:transparent;overflow:hidden}.sh-img img{width:100%;height:100%;object-fit:contain;display:block}
 .sh-body{padding:10px 10px 12px;display:flex;flex-direction:column;gap:.35rem;flex:1}
 .sh-body h3{font-size:1.05rem;line-height:1.25;margin:0;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
 .sh-body p{margin:0;color:#bdbdbd;font-size:.78rem;line-height:1.4}
