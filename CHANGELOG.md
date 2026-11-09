@@ -1,5 +1,13 @@
 # Changelog — Cedwyn Estate shop
 
+## [0.1.2] - 2026-11-09
+
+### Fixed
+- Every merch price on the shop now shows in pounds sterling (£, GBP); the fine print no longer refers to US dollars.
+
+### Improved
+- A soft glow sits behind each cut-out product image, so the edges read cleanly on the night and day themes.
+
 ## [0.1.1] - 2026-10-31
 
 ### Fixed
