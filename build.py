@@ -22,7 +22,7 @@ FOOT = """<footer class="sl-foot"><div class="sl-foot-in"><a class="sl-foot-titl
 <p class="sh-fine">— Sion's Tab agent</p></div></footer></body></html>"""
 def card(p):
     buy = p.get('buy_url')
-    pr = p['price_label'] if p.get('price_label') else ('from ' if (p.get('price_usd_max') or 0) > p['price_usd'] else '') + f"${p['price_usd']:.2f}"
+    pr = p['price_label'] if p.get('price_label') else ('from ' if (p.get('price_usd_max') or 0) > p['price_usd'] else '') + f"£{p['price_usd']:.2f}"
     label = 'Buy' if (CFG.get('checkout_open') or p.get('buy_now')) else 'See it'
     btn = f'<a class="sl-btn sh-buy" href="{e(buy)}" rel="noopener">{label} · {pr}</a>' if buy else f'<span class="sl-btn sh-buy sh-off">Coming soon · {pr}</span>'
     imgs = p.get('image') or ''
@@ -55,7 +55,7 @@ idx = HEAD.format(title="Cedwyn Estate shop · Tŷ Mawr / Great House Farm", des
 <li>The item is printed to order by a print partner near you (UK items print in the UK where available).</li>
 <li>It is posted to you, with tracking. Delivery cost and time are shown at checkout before you pay.</li>
 <li>If it arrives damaged or misprinted, it's reprinted or refunded. See <a href="/terms/">terms, delivery and returns</a>.</li></ol>
-<p class="sh-fine">Prices are in US dollars, the store's base currency; your card converts at checkout. They cover the print, the payment fees and little else. The project runs at cost, not for profit.</p></section>
+<p class="sh-fine">Prices are in pounds sterling (GBP). Delivery and the final total are shown at checkout before you pay. They cover the print, the payment fees and little else. The project runs at cost, not for profit.</p></section>
 </main>""" + FOOT
 terms = HEAD.format(title="Terms, delivery and returns · Cedwyn Estate shop", desc="Who sells the merch, how delivery works, and returns.", path="/terms/", v=v) + f"""
 <main class="sh-page"><h1>Terms, delivery and returns</h1>
