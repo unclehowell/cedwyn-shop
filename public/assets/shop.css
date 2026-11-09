@@ -81,3 +81,11 @@
   .sh-size-s .sh-body h3{font-size:.72rem}
   .sh-size-s .sh-buy{font-size:.56rem!important}
 }
+
+/* Card-size type scale must beat the shared ghf type shell (html.ghf-shell … h3, specificity 0,2,3). */
+#shop-grid.sh-size-s .sh-body h3{font-size:.82rem;line-height:1.2;overflow-wrap:anywhere;hyphens:auto}
+#shop-grid.sh-size-m .sh-body h3{font-size:1.05rem;line-height:1.25}
+#shop-grid.sh-size-l .sh-body h3{font-size:1.2rem;line-height:1.3}
+@media(max-width:440px){#shop-grid.sh-size-s .sh-body h3{font-size:.72rem}}
+/* Page heading kept for screen readers and search, hidden visually (the hero was removed on purpose in #13). */
+.sh-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
