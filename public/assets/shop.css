@@ -44,3 +44,40 @@
 
 /* High-contrast keyboard focus for the dark Cedwyn Estate storefront. */
 :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #e8d3a6;outline-offset:4px;border-radius:3px}
+
+
+/* Product grid density control — follows the documentary's remembered card-size selector. */
+.sh-products{padding-top:14px}
+.sh-viewbar{max-width:1100px;margin:0 auto 12px;padding:0 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:7px}
+.sh-view-label{margin-right:4px;color:#999;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.sh-view-b{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:6px 10px;border:1px solid #3a3a3a;border-radius:999px;background:#111;color:#c5c5c5;font:500 .76rem/1 Barlow,Arial,sans-serif;cursor:pointer}
+.sh-view-b svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sh-view-b[aria-pressed="true"]{background:#c9a25a;color:#090909;border-color:#c9a25a}
+.sh-grid.sh-size-s{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sh-grid.sh-size-m{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sh-grid.sh-size-l{grid-template-columns:minmax(0,1fr);gap:16px}
+.sh-size-s .sh-body{padding:7px 7px 9px;gap:.28rem}
+.sh-size-s .sh-body h3{font-size:.82rem;line-height:1.2}
+.sh-size-s .sh-body>p:not(.sh-kind){display:none}
+.sh-size-s .sh-kind{font-size:.54rem!important}
+.sh-size-s .sh-buy{font-size:.62rem!important;padding:.42rem .28rem!important}
+.sh-size-l .sh-card{display:flex;flex-direction:column}
+.sh-size-l .sh-body{padding:14px 16px 16px;gap:.5rem}
+.sh-size-l .sh-body h3{font-size:1.2rem;line-height:1.3}
+.sh-size-l .sh-body p{font-size:.9rem;line-height:1.5}
+.sh-size-l .sh-kind{font-size:.65rem!important}
+.sh-size-l .sh-buy{font-size:.78rem!important;padding:.75rem .6rem!important}
+@media(min-width:760px){
+  .sh-size-l .sh-card{display:grid;grid-template-columns:minmax(260px,40%) minmax(0,1fr);align-items:stretch}
+  .sh-size-l .sh-img{height:100%;aspect-ratio:1/1}
+  .sh-size-l .sh-body{padding:20px}
+}
+@media(max-width:440px){
+  .sh-viewbar{justify-content:center;padding:0 10px}
+  .sh-view-label{margin-right:2px}
+  .sh-view-b{gap:5px;padding:6px 8px}
+  .sh-view-b span{font-size:.7rem}
+  .sh-grid.sh-size-s{gap:7px}
+  .sh-size-s .sh-body h3{font-size:.72rem}
+  .sh-size-s .sh-buy{font-size:.56rem!important}
+}
